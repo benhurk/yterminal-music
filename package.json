@@ -1,0 +1,16 @@
+{
+  "name": "yterminal-music",
+  "version": "1.0.0",
+  "description": "Tool for playing music from Youtube Music on the terminal.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "ytmusic-api": "^5.3.0"
+  }
+}
