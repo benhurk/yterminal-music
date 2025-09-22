@@ -32,11 +32,11 @@ export default function SearchBar(layout, screen) {
     const searchFor = searchBar.getValue();
     searchBar.setValue("");
 
-    await ytmusic.search(searchFor).then((results) => {
-      const filteredResults = results.filter((r) => r.type === "VIDEO");
-      SearchResults(layout, screen, filteredResults);
+    await ytmusic.searchSongs(searchFor).then((results) => {
+      SearchResults(layout, screen, results);
     });
 
+    ytmusic.filter;
     screen.render();
   });
 
@@ -45,4 +45,6 @@ export default function SearchBar(layout, screen) {
     searchBar.setValue("");
     screen.render();
   });
+
+  return { searchBar };
 }

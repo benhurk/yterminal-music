@@ -1,21 +1,25 @@
 import blessed from "blessed";
 import playSong from "../helpers/playSong.js";
+import { updateSongLabel } from "../index.js";
 
 export default function SearchResults(layout, screen, results) {
   const resultItems = results.map((r) => {
-    return ` 󰎇  ${r.name}  |    ${r.artist.name}  |  󰥔  ${Number(r.duration) / 60} `;
+    return ` 󰎇  ${r.name}  |    ${r.artist.name}  |  󰥔  ${(Number(r.duration) / 60).toFixed(1)} `;
   });
 
   const searchResults = blessed.list({
     parent: screen,
-    top: 4,
+    top: "center",
     left: 0,
     width: "100%-8",
     height: "75%",
-    valign: "middle",
     scrollable: true,
     keys: true,
     items: resultItems,
+    padding: {
+      top: 1,
+      bottom: 1,
+    },
     style: {
       selected: {
         bg: "blue",
@@ -36,7 +40,11 @@ export default function SearchResults(layout, screen, results) {
     const selected = searchResults.selected;
     const selectedResult = results[selected];
 
-    playSong(selectedResult.videoId);
+    playSong(selectedResult.videoId, screen);
+
+    updateSongLabel(
+      `󰎇 ${selectedResult.name}, by ${selectedResult.artist.name}`,
+    );
     searchResults.destroy();
     screen.render();
   });
@@ -45,4 +53,6 @@ export default function SearchResults(layout, screen, results) {
     searchResults.destroy();
     screen.render();
   });
+
+  return { searchResults };
 }
