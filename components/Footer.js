@@ -7,9 +7,11 @@ export default function Footer(layout) {
     left: 0,
     align: "center",
     top: "100%-7",
-    content: "[Q] Quit | [/] Search",
+    content: "[q] Quit | [/] Search",
     border: "line",
   });
 
   layout.append(footer);
+
+  return { footer };
 }
